@@ -17,6 +17,10 @@ Platform independent.
 
 NOT MAKE
 
+Use Link
+
+[FIKA Server](https://github.com/project-fika/Fika-Server)
+[SPT-AKI Server](https://dev.sp-tarkov.com/SPT-AKI/Server)
 ---
 
 1. Build the server 
