@@ -1,7 +1,13 @@
 services:
-  tarkov-sitcoop:
-    image: stayintarkov/stayintarkov:latest
-    container_name: sitcoop
+  fika:
+    build:
+      dockerfile: ./server
+      args:
+        SIT_BRANCH: "development"
+        SIT: "HEAD^"
+        SPT_BRANCH: "3.8.1-DEV"
+        SPT: "HEAD^"
+    container_name: fika
     volumes:
       - ./server:/opt/server
     ports:

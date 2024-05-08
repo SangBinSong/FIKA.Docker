@@ -20,7 +20,7 @@ Editing...
 [SPT-AKI Server](https://dev.sp-tarkov.com/SPT-AKI/Server)
 
 ---
-## Original README
+## Original 
 
 1. Build the server 
 	
@@ -28,10 +28,10 @@ Editing...
    ```bash
    docker build \
       --no-cache \
-      --build-arg SIT=26b9c364963ba49de71d5761bed1135ddad50f77  \
-      --build-arg SPT=2dd4d914382657378d9cdec173039d771fe33220 \
-      --label SITCoop \
-      -t sitcoop .
+      --build-arg SIT=  \
+      --build-arg SPT= \
+      --label fika \
+      -t fika .
    ```
    Same, but in one line:
    ```bash
