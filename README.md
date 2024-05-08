@@ -1,10 +1,6 @@
 <div align=center style="text-align: center;">
-<h1>FIKA Tarkov - Dockerized(Stay in Tarkov fork)</h1>
-<h2>Quickly set up your personal Escape from Tarkov server in just 5 minutes..</h2>
-<h2>The Linux Container, that builds the server too</h2>
-<h4>Why? Because everyone should be able to build, and not rely on unknown builds from unknown sources.</h3>
-
-Platform independent.
+<h1>FIKA Tarkov - Dockerized (Stay in Tarkov fork)</h1>
+Platform independent. / Unofficial.
 </div>
 
 ---
@@ -15,13 +11,16 @@ Platform independent.
 2. `git clone https://github.com/SangBinSong/FIKA.Docker.git`
 3. `cd FIKA.Docker`
 
-NOT MAKE
+Editing...
 
-Use Link
+## Use Link
 
 [FIKA Server](https://github.com/project-fika/Fika-Server)
+
 [SPT-AKI Server](https://dev.sp-tarkov.com/SPT-AKI/Server)
+
 ---
+## Original README
 
 1. Build the server 
 	
@@ -67,4 +66,4 @@ docker update --restart unless-stopped sitcoop
 1. ... wait a few seconds, then you can connect to `http://YOUR_IP:6969`
 
 ## Bugs and Issues
-Let me know if there are any. Feel free to submit a PR.
+No Feedback
