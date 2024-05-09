@@ -1,14 +1,19 @@
-FROM node:20.11.1-alpine AS builder
+FROM node:20.11.1-slim AS builder
 ARG SPT=3.8.1
+ARG SPT_COMMIT=HEAD
 ARG FIKA=v2.0
+ARG FIKA_COMMIT=HEAD
 
 WORKDIR /opt
 
 RUN <<EOF
-apk update -q
-apk upgrade -q
-apk add -q git curl python3
+apt-get update -yq
+apt-get upgrade -yq
+apt-get install -yq git git-lfs curl
 git clone -b $SPT https://dev.sp-tarkov.com/SPT-AKI/Server.git srv
+cd srv
+git lfs pull
+git checkout $SPT_COMMIT
 EOF
 
 WORKDIR /opt/srv/project
@@ -33,7 +38,7 @@ EOF
 # rm -rf ./server/user/mods/SITCoop/.git
 # EOF
 
-FROM node:20.11.1-alpine
+FROM node:20.11.1-slim
 
 WORKDIR /opt
 
@@ -44,7 +49,7 @@ chmod o+rwx /opt -R
 cd /opt/server
 chown $(id -u):$(id -g) ./* -Rf
 sed -i 's/127.0.0.1/0.0.0.0/g' /opt/server/Aki_Data/Server/configs/http.json
-NODE_CHANNEL_FD= timeout --preserve-status 40s ./Aki.Server.exe </dev/null >/dev/null 2>&1 
+NODE_CHANNEL_FD=" timeout --preserve-status 40s ./Aki.Server.exe </dev/null >/dev/null 2>&1"
 EOF
 
 # Exposing ports
