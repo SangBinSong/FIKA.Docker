@@ -1,15 +1,17 @@
-FROM node:20.11.1-slim AS builder
+FROM node:20.11.1 AS builder
 ARG SPT=3.8.1
 ARG SPT_COMMIT=HEAD
 ARG FIKA=v2.0
 ARG FIKA_COMMIT=HEAD
 
+ARG BUILDARCH
+ARG BUILDOS
+
 WORKDIR /opt
 
 RUN <<EOF
-apt-get update -yq
-apt-get upgrade -yq
-apt-get install -yq git git-lfs curl
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+apt-get install -yq git-lfs
 git clone -b $SPT https://dev.sp-tarkov.com/SPT-AKI/Server.git srv
 cd srv
 git lfs pull
@@ -25,7 +27,7 @@ WORKDIR /opt/srv/project
 ## Install npm dependencies and run build
 RUN <<EOF
 yarn
-yarn build:release -- --arch=$([ "$(uname -m)" = "aarch64" ] && echo arm64 || echo x64) --platform=linux
+yarn build:release -- --arch=$BUILDARCH --platform=$BUILDOS
 mv build/ /opt/server/
 EOF
 
