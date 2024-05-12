@@ -1,15 +1,15 @@
 services:
-  fika:
+  spt:
     build:
-      dockerfile: ./server
-      args:
-        SIT_BRANCH: "development"
-        SIT: "HEAD^"
-        SPT_BRANCH: "3.8.1-DEV"
-        SPT: "HEAD^"
+      context: .
+      # args:
+      #   SPT_BRANCH: "3.8.1-DEV"
+      #   SPT: "HEAD"
     container_name: fika
     volumes:
       - ./server:/opt/server
     ports:
       - "6969-6971:6969-6971"
+    # environment:
+    #   - LC_ALL=ko_kr.utf-8
     restart: unless-stopped

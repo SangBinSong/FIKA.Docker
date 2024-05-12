@@ -1,0 +1,23 @@
+services:
+  fika:
+    build:
+      context: .
+      no_cache: true
+      # args:
+      #   SPT : 3.8.1
+      #   SPT_COMMIT : HEAD
+      #   FIKA : v2.0
+      #   FIKA_COMMIT : HEAD
+    container_name: fika
+    volumes:
+      - ./server:/opt/server
+    # environment:
+    #   - LC_ALL=ko_kr.utf-8
+    ports:
+      - "6969-6971:6969-6971"
+      - "25565/udp"
+    restart: unless-stopped
+# networks:
+#   default:
+#     name: nginx_proxy
+#     external: true
