@@ -31,9 +31,10 @@ WORKDIR /opt/server
 COPY ./run.sh /opt/server
 
 RUN <<EOF
-XZ_OPT=-9
-[ -e "Aki_Data" ] && bzip2 -9 Aki_Data.xz Aki_Data/ && rm -rf ./Aki_Data
-[ -e "user" ] && tar cJf user.xz user/ && rm -rf ./user || true
+GZIP=-9
+sed -i 's/\r$//g' ./run.sh
+if [ -e "Aki_Data" ]; then tar czf Aki_Data.tar.gz Aki_Data/ && rm -rf ./Aki_Data ; fi
+if [ -e "user" ]; then tar czf user.tar.gz user/ && rm -rf ./user ; fi
 EOF
 
 FROM node:20.11.1-slim
@@ -55,8 +56,7 @@ EXPOSE 6970
 EXPOSE 6971
 # EXPOSE 25565/udp
 
-# ENTRYPOINT /opt/server/run.sh
-CMD /bin/bash
+ENTRYPOINT /opt/server/run.sh
 
 # Specify the default command to run when the container starts
-# CMD /opt/server/Aki.Server.exe
+CMD /opt/server/Aki.Server.exe
