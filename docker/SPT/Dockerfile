@@ -45,6 +45,7 @@ WORKDIR /opt/server
 
 # Set permissions
 RUN <<EOF
+npm i -g bbgurl
 chmod o+rwx /opt -R
 mkdir /opt/server_data
 chown $(id -u):$(id -g) ./* -Rf
@@ -56,7 +57,7 @@ EXPOSE 6970
 EXPOSE 6971
 # EXPOSE 25565/udp
 
-ENTRYPOINT /opt/server/run.sh
+ENTRYPOINT ["/opt/server/run.sh"]
 
 # Specify the default command to run when the container starts
-CMD /opt/server/Aki.Server.exe
+CMD ["/opt/server/Aki.Server.exe"]

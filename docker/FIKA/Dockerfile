@@ -7,9 +7,11 @@ ARG FIKA_COMMIT=HEAD
 WORKDIR /opt
 
 RUN <<EOF
-apt-get update -yq
-apt-get upgrade -yq
-apt-get install -yq git git-lfs curl
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+apt-get install -yq git-lfs
+EOF
+
+RUN <<EOF
 git clone -b $SPT https://dev.sp-tarkov.com/SPT-AKI/Server.git srv
 cd srv
 git lfs pull
@@ -18,11 +20,6 @@ EOF
 
 WORKDIR /opt/srv/project
 
-## remove the encoding from aki
-## todo: find a better workaround
-# RUN sed -i '/setEncoding/d' /opt/srv/project/src/Program.ts || true
-
-## Install npm dependencies and run build
 RUN <<EOF
 yarn
 yarn build:release -- --arch=$([ "$(uname -m)" = "aarch64" ] && echo arm64 || echo x64) --platform=linux
@@ -40,15 +37,29 @@ unzip ./dist/fika-server.zip -d /opt/server/
 cd .
 EOF
 
+WORKDIR /opt/server
+
+COPY ./run.sh /opt/server
+
+RUN <<EOF
+GZIP=-9
+sed -i 's/\r$//g' ./run.sh
+if [ -e "Aki_Data" ]; then tar czf Aki_Data.tar.gz Aki_Data/ && rm -rf ./Aki_Data ; fi
+if [ -e "user" ]; then tar czf user.tar.gz user/ && rm -rf ./user ; fi
+EOF
+
 FROM node:20.11.1-slim
 
-COPY --from=builder /opt/server /opt/backup
+COPY --from=builder /opt/server /opt/server
 
-WORKDIR /opt
+WORKDIR /opt/server
 
 # Set permissions
 RUN <<EOF
+npm i -g bbgurl
 chmod o+rwx /opt -R
+mkdir /opt/server_data
+chown $(id -u):$(id -g) ./* -Rf
 EOF
 
 # Exposing ports
@@ -57,7 +68,7 @@ EXPOSE 6970
 EXPOSE 6971
 EXPOSE 25565/udp
 
-# Specify the default command to run when the container starts
-# ENTRYPOINT 
+ENTRYPOINT ["/opt/server/run.sh"]
 
-CMD /opt/server/Aki.Server.exe
+# Specify the default command to run when the container starts
+CMD ["/opt/server/Aki.Server.exe"]

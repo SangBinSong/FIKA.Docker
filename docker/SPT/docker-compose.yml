@@ -6,13 +6,10 @@ services:
       #   SPT_BRANCH: "3.8.1-DEV"
       #   SPT: "HEAD"
     container_name: spt
-    stdin_open: true
-    tty: true
     volumes:
       - ./server_data:/opt/server_data
     ports:
       - "6969-6971:6969-6971"
-    # command: "/bin/bash"
     # environment:
     #   - LC_ALL=ko_kr.utf-8
     # restart: unless-stopped
