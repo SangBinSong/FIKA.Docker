@@ -9,8 +9,7 @@ DIR_AKI="$LINK_ROOT_DIR/Aki_Data"
 LINK_DIR_USER="/opt/server/user"
 DIR_USER="$LINK_ROOT_DIR/user"
 
-# BACKENDIP="${BACKENDIP:=$(wget -qO - ipv4.icanhazip.com)}"
-BACKENDIP="${BACKENDIP:=$(bbgurl -Q http://ipv4.icanhazip.com)}"
+BACKENDIP="${BACKENDIP:=$(bbgurl -Q https://ipv4.icanhazip.com)}"
 
 if [ ! -d "$DIR_AKI" ]; then echo "Make dir Aki_data"
     mkdir $DIR_AKI;

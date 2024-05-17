@@ -1,5 +1,6 @@
 services:
   spt:
+    image: spt/spt-server:3.8.1
     build:
       context: .
       # args:

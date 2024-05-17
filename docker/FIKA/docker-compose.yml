@@ -1,13 +1,13 @@
 services:
   fika:
+    image: spt/fika-server:v2.0
     build:
       context: .
       # args:
-      #   SPT : 3.8.1
+      #   SPT : 3.8.3
       #   SPT_COMMIT : HEAD
-      #   FIKA : v2.0
+      #   FIKA : v2.1.0
       #   FIKA_COMMIT : HEAD
-    container_name: fika
     volumes:
       - ./server_data:/opt/server_data
     # environment:
