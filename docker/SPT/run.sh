@@ -36,7 +36,7 @@ if [ ! -L "$LINK_DIR_USER" ]; then echo "Make link user"
     ln -s $DIR_USER ;
 fi
 
-if [ $(find $DIR_USER -maxdepth 1 -type d | wc -l) -eq 1 -a -e "$LINK_DIR_USER.tar.gz" ]; then echo "Unzip user"
+if [ -e "$LINK_DIR_USER.tar.gz" ]; then echo "Unzip fika_mods"
     tar xf $LINK_DIR_USER.tar.gz -C $LINK_ROOT_DIR ; 
     chown $(id -u):$(id -g) $LINK_ROOT_DIR/* -Rf ;
 fi 
