@@ -9,7 +9,11 @@ Platform independent. / Unofficial.
 
 1. Install [DOCKER](https://docs.docker.com/engine/install/)
 2. `git clone https://github.com/SangBinSong/FIKA.Docker.git`
-3. `cd FIKA.Docker`
+3. `cd FIKA.Docker/FIKA`
+4. 상황에 맞게 버전, 이미지 이름 수정 ( Default version spt: 3.8.3 / fika: v2.1.0 )
+4. `docker compose build`
+5. `docker compose up -d`
+6. `docker compsoe logs -f -n 300`
 
 Editing...
 

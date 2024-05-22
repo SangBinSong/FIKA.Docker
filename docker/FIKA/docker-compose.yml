@@ -1,6 +1,6 @@
 services:
   fika:
-    image: spt/fika-server:v2.0
+    image: spt/fika-server:v2.1.0
     build:
       context: .
       # args:
