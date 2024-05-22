@@ -30,13 +30,13 @@ Platform independent. / Unofficial.
 
 ```bash
 # Show ps
-docker compsoe ps
+docker compose ps
 
 # Show log
-docker compsoe logs -f -n 300
+docker compose logs -f -n 300
 
 # server stop
-docker compsoe stop
+docker compose stop
 
 # remove build cache
 docker buildx prune
