@@ -18,7 +18,7 @@ Platform independent. / Unofficial.
      * spt : spt/spt-server:3.8.3
      * fika : spt/fika-server:v2.0
 5. `docker compose build`
-    1. If not first buile, `docker compose build --no-cache`
+    1. If not first build, `docker compose build `
 6. If build success, `docker compose up -d`
 7. enjoy!
 
